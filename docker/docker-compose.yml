@@ -26,7 +26,7 @@ services:
       HOST: "0.0.0.0"
       PAPERCLIP_HOME: "/paperclip"
       PAPERCLIP_DEPLOYMENT_MODE: "authenticated"
-      PAPERCLIP_DEPLOYMENT_EXPOSURE: "private"
+      PAPERCLIP_DEPLOYMENT_EXPOSURE: "public"
       PAPERCLIP_PUBLIC_URL: "https://swarm.neuronguard.site"
       BETTER_AUTH_SECRET: "${BETTER_AUTH_SECRET}"
       USER_UID: "1001"
