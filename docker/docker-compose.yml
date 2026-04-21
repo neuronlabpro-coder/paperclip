@@ -29,6 +29,8 @@ services:
       PAPERCLIP_DEPLOYMENT_EXPOSURE: "private"
       PAPERCLIP_PUBLIC_URL: "https://swarm.neuronguard.site"
       BETTER_AUTH_SECRET: "${BETTER_AUTH_SECRET}"
+      USER_UID: "1001"
+      USER_GID: "1001"
     volumes:
       - paperclip-data:/paperclip
     depends_on:
