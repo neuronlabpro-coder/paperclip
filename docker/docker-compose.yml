@@ -12,6 +12,8 @@ services:
       retries: 30
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - default
 
   server:
     build:
@@ -36,7 +38,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - default
+      - dokploy-network
 
 volumes:
   pgdata:
   paperclip-data:
+networks:
+  dokploy-network:
+    external: true
