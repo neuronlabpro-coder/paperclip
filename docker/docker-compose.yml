@@ -1,6 +1,8 @@
 services:
   db:
     image: postgres:17-alpine
+    ports:
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
     environment:
       POSTGRES_USER: paperclip
       POSTGRES_PASSWORD: paperclip
@@ -12,8 +14,6 @@ services:
       retries: 30
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - default
 
   server:
     build:
@@ -21,6 +21,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3100:3100"
+    labels:
+      - "traefik.http.middlewares.paperclip-ratelimit.ratelimit.average=60"
+      - "traefik.http.middlewares.paperclip-ratelimit.ratelimit.burst=60"
     environment:
       DATABASE_URL: postgres://paperclip:paperclip@db:5432/paperclip
       PORT: "3100"
@@ -39,13 +42,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - default
-      - dokploy-network
 
 volumes:
   pgdata:
   paperclip-data:
-networks:
-  dokploy-network:
-    external: true
