@@ -2,7 +2,7 @@ services:
   db:
     image: postgres:17-alpine
     ports:
-      - "${POSTGRES_HOST_PORT:-5433}:5432"
+      - "${POSTGRES_HOST_PORT:-5443}:5432"
     environment:
       POSTGRES_USER: paperclip
       POSTGRES_PASSWORD: paperclip
