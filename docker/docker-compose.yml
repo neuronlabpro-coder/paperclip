@@ -20,13 +20,13 @@ services:
       context: ..
       dockerfile: Dockerfile
     ports:
-      - "3100:3100"
+      - "${PORT:-3202}:3202"
     labels:
       - "traefik.http.middlewares.paperclip-ratelimit.ratelimit.average=60"
       - "traefik.http.middlewares.paperclip-ratelimit.ratelimit.burst=60"
     environment:
       DATABASE_URL: postgres://paperclip:paperclip@db:5432/paperclip
-      PORT: "3100"
+      PORT: "${PORT:-3202}"
       SERVE_UI: "true"
       HOST: "0.0.0.0"
       PAPERCLIP_HOME: "/paperclip"
